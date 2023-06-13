@@ -1,7 +1,25 @@
 package main
 
-import ("fmt")
+import (
+    "fmt"
+	"log" 
+	"net/http"
 
-func  main()  {
-	fmt.Println("hello")
+)
+
+func homePage(w http.ResponseWriter, r *http.Request){
+	fmt.Fprintf(w, "Db Connected !")
 }
+
+func handleRequests(){
+	http.HandleFunc("/", homePage)
+	log.Fatal(http.ListenAndServe(":8081", nil))
+}
+
+func main () {
+
+	handleRequests()
+
+}
+
+
